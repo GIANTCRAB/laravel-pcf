@@ -5,8 +5,8 @@ LABEL maintainer="Huiren Woo <giantcrabby@gmail.com>"
 RUN apt-get update \
     && apt-get --yes --force-yes install apt-transport-https
 
-RUN curl -L https://cli.run.pivotal.io/stable?release=debian64&source=github | dpkg -i - \
-    && apt-get --yes --force-yes install -f \
+RUN curl -L "https://cli.run.pivotal.io/stable?release=linux64-binary&source=github" | tar -zx \
+    && mv cf /usr/local/bin
     && cf --version
 
 RUN cf add-plugin-repo CF-Community https://plugins.cloudfoundry.org \
