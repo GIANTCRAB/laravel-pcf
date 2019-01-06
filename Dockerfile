@@ -5,7 +5,7 @@ LABEL maintainer="Huiren Woo <giantcrabby@gmail.com>"
 RUN apt-get update \
     && apt-get --yes --force-yes install apt-transport-https
 
-RUN curl -k -o ./cf_cli.deb -L https://cli.run.pivotal.io/stable?release=debian64&source=github \
+RUN curl https://cli.run.pivotal.io/stable?release=debian64&source=github -JL -o cf_cli.deb \
     && dpkg -i ./cf_cli.deb \
     && apt-get --yes --force-yes install -f \
     && cf --version
