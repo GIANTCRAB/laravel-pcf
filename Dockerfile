@@ -2,7 +2,7 @@ FROM woohuiren/php-laravel-env
 MAINTAINER Huiren Woo <giantcrabby@gmail.com>
 LABEL maintainer="Huiren Woo <giantcrabby@gmail.com>"
 
-ADD . "$(pwd)"
+ADD ./pivotal-tmp /pivotal-tmp
 
 RUN apt-get update \
     && apt-get --yes --force-yes install apt-transport-https
@@ -11,8 +11,8 @@ RUN curl -L "https://cli.run.pivotal.io/stable?release=linux64-binary&source=git
     && mv cf /usr/local/bin \
     && cf --version
 
-RUN cf install-plugin ./scheduler-for-pcf-cliplugin-linux64-binary-1.1.0 -f \
-    && rm -rf ./scheduler-for-pcf-cliplugin-linux64-binary-1.1.0
+RUN cf install-plugin /pivotal-tmp/scheduler-for-pcf-cliplugin-linux64-binary-1.1.0 -f \
+    && rm -rf /pivotal-tmp/scheduler-for-pcf-cliplugin-linux64-binary-1.1.0
 
 RUN cf add-plugin-repo CF-Community https://plugins.cloudfoundry.org \
     && cf install-plugin blue-green-deploy -r CF-Community -f
