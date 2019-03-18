@@ -9,10 +9,10 @@ RUN curl -L "https://cli.run.pivotal.io/stable?release=linux64-binary&source=git
     && mv cf /usr/local/bin \
     && cf --version
 
-RUN cf add-plugin-repo CF-Community https://plugins.cloudfoundry.org \
-    && cf install-plugin blue-green-deploy -r CF-Community -f
-
 RUN cf install-plugin ./blobs/scheduler-for-pcf-cliplugin-linux64-binary-1.1.0 -f \
     && rm -rf ./blobs
+
+RUN cf add-plugin-repo CF-Community https://plugins.cloudfoundry.org \
+    && cf install-plugin blue-green-deploy -r CF-Community -f
 
 RUN cf install-plugin https://github.com/odlp/antifreeze/releases/download/v0.4.0/antifreeze-linux -f
