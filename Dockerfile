@@ -2,6 +2,8 @@ FROM woohuiren/php-laravel-env
 MAINTAINER Huiren Woo <giantcrabby@gmail.com>
 LABEL maintainer="Huiren Woo <giantcrabby@gmail.com>"
 
+ADD . "$(pwd)"
+
 RUN apt-get update \
     && apt-get --yes --force-yes install apt-transport-https
 
